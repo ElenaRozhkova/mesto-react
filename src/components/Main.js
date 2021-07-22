@@ -1,43 +1,30 @@
 import React from 'react';
 import {api} from "./../utils/api";
 import avatar from "./../images/avataricon.svg";
+import { Result } from 'postcss';
+import Card from './Card';
 
 function Main (props) {
     const [userName, setUserName] = React.useState();
     const [userDescription , setUserDescription ] = React.useState();
     const [userAvatar, setUserAvatar] = React.useState();
-
-
+  
+     
 
     React.useEffect(() => {
-        console.log(api);
-
         api.getProfileInfo()
         .then((result) => {
-            console.log(result.name);
             setUserName(result.name);
-            console.log(result.about);
             setUserDescription(result.about);
-            console.log(result.avatar);
             setUserAvatar(result.avatar);
-            //user.setUserInfo(result);
-            //popupEditProfile.close();
         })
 
         .catch((err) => {
             console.log(err);
         })
-        .finally(() => {
-           
+        .finally(() => {       
         });
-
-            // Возвращаем функцию, которая удаляет эффекты
-        return () => {
-          //document.body.classList.remove('no-cursor');
-         // document.removeEventListener('mousemove', handleMouseMove);
-        };
       });
-
 
   return (
     <main className="content">
@@ -61,19 +48,12 @@ function Main (props) {
     </section>
 
     <section className="cards root__section" id="cards">
-        <template id="card-template" className="card-template">
-        <article className="card" id="card">
-            <img className="card__image" />
-            <div className="card__text">
-               <h2 className="card__title"></h2>
-               <div className="card__like-group">
-                  <button type="button" className="card__vector-like"></button>
-                  <label className="card__amount-like">0</label>
-               </div>
-            </div>
-            <button type="button" className="card__vector-delete" />
-        </article>
-    </template>
+       { props.cards.map((card, i) => (
+            <div key={i}>
+           <Card card={card} onCardClick={props.onCardClick} /> 
+           </div> 
+        ))}
+
     </section>
 </main>
   );

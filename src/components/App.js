@@ -5,6 +5,7 @@ import Main  from './Main';
 import Footer  from './Footer';
 import PopupWithForm   from './PopupWithForm';
 import ImagePopup   from './ImagePopup';
+import {api} from "./../utils/api";
 
 function App () {
 // Хук, управляющий внутренним состоянием.
@@ -12,6 +13,27 @@ const [isOpen , setIsOpen ] = React.useState(false);
 const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
 const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+const [cards, setСards] = React.useState([]);
+const [selectedCard, setSelectedCard] = React.useState({});
+
+
+      
+React.useEffect(() => {
+    api.getInitialCards()
+    .then((result) => {
+        setСards(result);        
+    })
+
+    .catch((err) => {
+        console.log(err);
+    })
+    .finally(() => {       
+    });
+  });
+
+    function handleCardClick(card) {
+       setSelectedCard(card);
+    }
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true);
@@ -29,14 +51,16 @@ const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
         setIsEditAvatarPopupOpen(false);
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
+        setSelectedCard({});
     }
+
 
 
     return (<>
     <div className="root-page"/>     
     <div className="root">
     <Header />
-    <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}/>
+    <Main cards={cards} onCardClick={handleCardClick}  onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick}/>
     <Footer />      
     </div>
 
@@ -82,7 +106,7 @@ const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
         </div>
     </div>
  
-    <ImagePopup />  
+    <ImagePopup card={selectedCard} onClose={closeAllPopups}/>  
   </>
     );
 }
