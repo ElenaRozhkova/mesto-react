@@ -8,18 +8,18 @@ function Main (props) {
         <div className="profile__avatar-info">
             <div className="profile__change-avatar">
                 <img className="profile__avatar" src="<%=require('./../images/image.jpg')%>" alt="Аватар"/>
-                <img onClick={props.onEditAvatar} onClose={props.closeAllPopups} className="profile__edit-icon" src="<%=require('./../images/avataricon.svg')%>" alt="Редактировать"/>
+                <img onClick={props.onEditAvatar} className="profile__edit-icon" src="<%=require('./../images/avataricon.svg')%>" alt="Редактировать"/>
             </div>
             <div className="profile__info">
                 <div className="profile__info-name">
                     <h1 className="profile__name">Жак-Ив Кусто</h1>
-                    <button  onClick={props.onEditProfile} onClose={props.closeAllPopups}  type="button" class="profile__edit-button" aria-label="Редактировать">     
+                    <button  onClick={props.onEditProfile}  type="button" className="profile__edit-button" aria-label="Редактировать">     
                     </button>
                 </div>
                 <p className="profile__job">Исследователь океана</p>
             </div>
         </div>
-        <button type="button" onClick={props.onAddPlace} onClose={props.closeAllPopups}  className="profile__add-button" aria-label="Добавить">                   
+        <button type="button" onClick={props.onAddPlace}  className="profile__add-button" aria-label="Добавить">                   
        </button>
     </section>
 
