@@ -5,7 +5,6 @@ import Main  from './Main';
 import Footer  from './Footer';
 import PopupWithForm   from './PopupWithForm';
 import ImagePopup   from './ImagePopup';
-import api from './../utils/api';
 
 function App () {
 // Хук, управляющий внутренним состоянием.
@@ -13,8 +12,6 @@ const [isOpen , setIsOpen ] = React.useState(false);
 const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
 const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-
-
 
     function handleEditAvatarClick() {
         setIsEditAvatarPopupOpen(true);

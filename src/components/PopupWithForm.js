@@ -16,27 +16,7 @@ function PopupWithForm (props) {
        </form>
    </div>
 </div>
-
-
-        
-
-/*  
-
-<div className="popup popup_type_question">
-        <div className="popup__container">
-            <form id="newQuestionPopup" name="questionPopup" className="popup__form" novalidate>
-                <fieldset className="popup__form-set">
-                    <button type="button" className="popup__close popup__close_type_question"> 
-                    <div className="popup__close-icon"></div>
-                </button>
-                    <label className="popup__title popup__title_type_question">Вы уверены?</label>
-                    <button type="submit" className="popup__button popup__button_type_question">Да</button>
-                </fieldset>
-            </form>
-        </div>
-    </div>
-*/
-    
+   
   );
 }
 

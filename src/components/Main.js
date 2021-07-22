@@ -1,22 +1,59 @@
 import React from 'react';
-
+import {api} from "./../utils/api";
+import avatar from "./../images/avataricon.svg";
 
 function Main (props) {
+    const [userName, setUserName] = React.useState();
+    const [userDescription , setUserDescription ] = React.useState();
+    const [userAvatar, setUserAvatar] = React.useState();
+
+
+
+    React.useEffect(() => {
+        console.log(api);
+
+        api.getProfileInfo()
+        .then((result) => {
+            console.log(result.name);
+            setUserName(result.name);
+            console.log(result.about);
+            setUserDescription(result.about);
+            console.log(result.avatar);
+            setUserAvatar(result.avatar);
+            //user.setUserInfo(result);
+            //popupEditProfile.close();
+        })
+
+        .catch((err) => {
+            console.log(err);
+        })
+        .finally(() => {
+           
+        });
+
+            // Возвращаем функцию, которая удаляет эффекты
+        return () => {
+          //document.body.classList.remove('no-cursor');
+         // document.removeEventListener('mousemove', handleMouseMove);
+        };
+      });
+
+
   return (
     <main className="content">
     <section className="profile root__section">
         <div className="profile__avatar-info">
             <div className="profile__change-avatar">
-                <img className="profile__avatar" src="<%=require('./../images/image.jpg')%>" alt="Аватар"/>
-                <img onClick={props.onEditAvatar} className="profile__edit-icon" src="<%=require('./../images/avataricon.svg')%>" alt="Редактировать"/>
+                <img className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }}  />
+                <img onClick={props.onEditAvatar} className="profile__edit-icon" src={avatar} alt="Редактировать"/>
             </div>
             <div className="profile__info">
                 <div className="profile__info-name">
-                    <h1 className="profile__name">Жак-Ив Кусто</h1>
+                    <h1 className="profile__name">{userName}</h1>
                     <button  onClick={props.onEditProfile}  type="button" className="profile__edit-button" aria-label="Редактировать">     
                     </button>
                 </div>
-                <p className="profile__job">Исследователь океана</p>
+                <p className="profile__job">{userDescription}</p>
             </div>
         </div>
         <button type="button" onClick={props.onAddPlace}  className="profile__add-button" aria-label="Добавить">                   
