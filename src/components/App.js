@@ -15,7 +15,7 @@ const [selectedCard, setSelectedCard] = React.useState({});
 
   React.useEffect(() => {
     const handleEsc = (event) => {
-       if (event.keyCode === 'Escape') {
+       if (event.key === 'Escape') {
         closeAllPopups();
       }
     };
