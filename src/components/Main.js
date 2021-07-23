@@ -1,7 +1,6 @@
 import React from 'react';
 import {api} from "./../utils/api";
 import avatar from "./../images/avataricon.svg";
-import { Result } from 'postcss';
 import Card from './Card';
 
 function Main (props) {
@@ -9,8 +8,6 @@ function Main (props) {
     const [userDescription , setUserDescription ] = React.useState();
     const [userAvatar, setUserAvatar] = React.useState();
   
-     
-
     React.useEffect(() => {
         api.getProfileInfo()
         .then((result) => {
@@ -24,14 +21,14 @@ function Main (props) {
         })
         .finally(() => {       
         });
-      });
+      },[]);
 
   return (
     <main className="content">
     <section className="profile root__section">
         <div className="profile__avatar-info">
             <div className="profile__change-avatar">
-                <img className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }}  />
+                <div className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})`  }}  />
                 <img onClick={props.onEditAvatar} className="profile__edit-icon" src={avatar} alt="Редактировать"/>
             </div>
             <div className="profile__info">

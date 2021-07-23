@@ -6,8 +6,7 @@ function Card(props) {
         props.onCardClick(props.card);
       } 
 
-  return (
-   
+  return (  
     <article className="card" id="card">
      <img className="card__image" src={props.card.link} alt={props.card.name} onClick={handleClick}/>
      <div className="card__text">

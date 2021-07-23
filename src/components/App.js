@@ -9,7 +9,6 @@ import {api} from "./../utils/api";
 
 function App () {
 // Хук, управляющий внутренним состоянием.
-const [isOpen , setIsOpen ] = React.useState(false);
 const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
 const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -29,7 +28,33 @@ React.useEffect(() => {
     })
     .finally(() => {       
     });
-  });
+  },[]);
+
+  React.useEffect(() => {
+    const handleEsc = (event) => {
+       if (event.keyCode === 27) {
+        closeAllPopups();
+      }
+    };
+     document.addEventListener('keydown', handleEsc);
+    return () => {
+     document.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    const closeByOverlay = (evt) => {
+        if (evt.target.classList.contains('popup')) {
+            closeAllPopups();
+          }
+      }
+     document.addEventListener('mousedown', closeByOverlay);
+
+    return () => {
+     document.removeEventListener('mousedown', closeByOverlay);
+    };
+  }, []);
+
 
     function handleCardClick(card) {
        setSelectedCard(card);
@@ -53,7 +78,6 @@ React.useEffect(() => {
         setIsAddPlacePopupOpen(false);
         setSelectedCard({});
     }
-
 
 
     return (<>
