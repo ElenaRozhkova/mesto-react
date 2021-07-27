@@ -6,6 +6,8 @@ function Card(props) {
         props.onCardClick(props.card);
       } 
 
+    //  console.log(props);
+
   return (  
     <article className="card" id={props.card._id}>
      <img className="card__image" src={props.card.link} alt={props.card.name} onClick={handleClick}/>

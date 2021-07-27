@@ -33,6 +33,10 @@ function Main (props) {
         })
     },[]);
 
+   /*function handleCardDelete () {
+
+   }*/
+
   return (
     <main className="content">
     <section className="profile root__section">

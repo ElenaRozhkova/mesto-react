@@ -29,6 +29,15 @@
             .then(res => this._getResponseData(res));
     }
 
+    getUserInfo () {
+        return fetch(`${this._url}/users/me`, {
+                headers: {
+                    authorization: this._token
+                }
+            })
+            .then(res => this._getResponseData(res));
+    }
+
     setProfileEdit(userName, userJob) {
         return fetch(`${this._url}/users/me`, {
                 method: 'PATCH',
