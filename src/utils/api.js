@@ -81,6 +81,16 @@
             .then(res => this._getResponseData(res))
     }
 
+    changeLikeCardStatus(id, isLiked) {
+        return fetch(`${this._url}/cards/likes/${id}`, {
+                method: `${isLiked ? 'PUT' : 'DELETE'}`,
+                headers: {
+                    authorization: this._token
+                }
+            })
+            .then(res => this._getResponseData(res))
+    }
+
     deleteLike(id) {
         return fetch(`${this._url}/cards/likes/${id}`, {
                 method: 'DELETE',
