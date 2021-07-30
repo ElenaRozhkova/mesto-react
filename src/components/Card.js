@@ -26,6 +26,9 @@ function Card(props) {
         props.onCardLike(props.card);
       } 
       
+      function handleDeleteClick() {
+        props.onCardDelete(props.card);
+      }
     //  console.log(props);
 
   return (  
@@ -38,7 +41,7 @@ function Card(props) {
            <label className="card__amount-like">{props.card.likes.length}</label>
         </div>
      </div>
-     <button type="button" className={cardDeleteButtonClassName} />
+     <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteClick}/>
      </article>
    
   );

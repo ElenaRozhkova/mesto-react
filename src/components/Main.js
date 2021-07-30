@@ -28,6 +28,21 @@ function Main (props) {
         });
     }
 
+    
+    function handleCardDelete (card) {        
+        api.deleteCard(card._id).then(() => {
+            console.log(cards);
+            // Формируем новый массив на основе имеющегося, удаляя из него карточку card._id
+          var newCards = cards.filter(function(c) {
+            return c._id !== card._id;
+          });
+
+          console.log(newCards);
+          // Обновляем стейт
+          setСards(newCards);
+        });
+    }
+
 
    /*function handleCardDelete () {
 
@@ -57,7 +72,7 @@ function Main (props) {
 
     <section className="cards root__section" id="cards">
        { cards.map((card, i) => (
-           <Card onCardLike={handleCardLike} key={card._id} card={card} onCardClick={props.onCardClick} /> 
+           <Card onCardLike={handleCardLike} onCardDelete ={handleCardDelete}  key={card._id} card={card} onCardClick={props.onCardClick} /> 
         ))}
 
     </section>
