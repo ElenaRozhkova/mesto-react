@@ -54,22 +54,6 @@
 
     }
 
-    setProfileEdit(userName, userJob) {
-        return fetch(`${this._url}/users/me`, {
-                method: 'PATCH',
-                headers: {
-                    authorization: this._token,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: userName,
-                    about: userJob
-                })
-            })
-            .then(res => this._getResponseData(res));
-
-    }
-
 
     addCard(cardName, cardLink) {
         return fetch(`${this._url}/cards`, {
@@ -127,7 +111,7 @@
             .then(res => this._getResponseData(res))
     }
 
-    changeAvatar(url) {
+    setUserAvatar(url) {
         return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
             headers: {

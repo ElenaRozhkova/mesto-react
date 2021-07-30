@@ -31,7 +31,6 @@ const [currentUser, setCurrentUser] = React.useState({});
   },[isEditProfilePopupOpen]);
 
   function handleUpdateUser (profile) {
-    console.log(profile);
     api.setUserInfo(profile.name, profile.about)
     .then ((user)=>{
       setCurrentUser(user);
@@ -41,7 +40,21 @@ const [currentUser, setCurrentUser] = React.useState({});
      .catch((err) => {
        console.log(err);
      })
-}
+  }
+
+  function handleUpdateAvatar (url){
+    api.setUserAvatar(url.avatar)
+    .then ((user)=>{
+      let copy = Object.assign([], currentUser);
+      copy.avatar = user.avatar;
+      setCurrentUser(copy);
+      closeAllPopups();
+     })
+     
+     .catch((err) => {
+       console.log(err);
+     })
+  }
 
   React.useEffect(() => {
     const handleEsc = (event) => {
@@ -103,7 +116,7 @@ const [currentUser, setCurrentUser] = React.useState({});
       </div>
 
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser ={handleUpdateUser}/>
-      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
       <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
   
       <ImagePopup card={selectedCard} onClose={closeAllPopups}/>  

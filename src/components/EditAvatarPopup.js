@@ -1,25 +1,25 @@
 import React from 'react';
 import PopupWithForm   from './PopupWithForm';
 
-function EditAvatarPopup({isOpen,onClose}) {
+function EditAvatarPopup({isOpen,onClose,onUpdateAvatar}) {
 
-   /* const [name, setName]=React.useState();
-    const [description , setDescription]=React.useState();
+    const [url, setUrl]=React.useState();
    
-    const changeName=(e)=>{
-        setName(e.target.value);  
-        console.log(name);
+    const changeUrl=(e)=>{
+      setUrl(e.target.value);  
     }
 
-    const changeDescription=(e)=>{
-        setDescription(e.target.value);  
-        console.log(description);
-    }*/
+    function handleSubmit(e) {
+      e.preventDefault();
+      onUpdateAvatar({
+        avatar: url,
+      });
+    }
 
   return ( 
-    <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isOpen} onClose={onClose} buttonText="Сохранить">
+    <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isOpen} onClose={onClose} buttonText="Сохранить" onSubmit ={handleSubmit}>
         <div className="form__container">
-        <input type="url" className="popup__input popup__input_type_text" id="avatar" name="avatar" placeholder="https://somewebsite.com/someimage.jpg" required />
+        <input type="url" value={url} onChange ={changeUrl} className="popup__input popup__input_type_text" id="avatar" name="avatar" placeholder="https://somewebsite.com/someimage.jpg" required />
         <span className="popup__input-error avatar-error"></span>
         </div>
     </PopupWithForm>  
