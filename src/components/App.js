@@ -28,7 +28,20 @@ const [currentUser, setCurrentUser] = React.useState({});
       console.log(err);
     })
 
-  },[]);
+  },[isEditProfilePopupOpen]);
+
+  function handleUpdateUser (profile) {
+    console.log(profile);
+    api.setUserInfo(profile.name, profile.about)
+    .then ((user)=>{
+      setCurrentUser(user);
+      closeAllPopups();
+     })
+     
+     .catch((err) => {
+       console.log(err);
+     })
+}
 
   React.useEffect(() => {
     const handleEsc = (event) => {
@@ -89,7 +102,7 @@ const [currentUser, setCurrentUser] = React.useState({});
       <Footer />      
       </div>
 
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser ={handleUpdateUser}/>
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
       <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
   

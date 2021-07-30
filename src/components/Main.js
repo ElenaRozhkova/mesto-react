@@ -43,11 +43,6 @@ function Main (props) {
         });
     }
 
-
-   /*function handleCardDelete () {
-
-   }*/
-
   return (
           <>         
     <main className="content">

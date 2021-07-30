@@ -38,6 +38,22 @@
             .then(res => this._getResponseData(res));
     }
 
+    setUserInfo(userName, userJob) {
+        return fetch(`${this._url}/users/me`, {
+                method: 'PATCH',
+                headers: {
+                    authorization: this._token,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: userName,
+                    about: userJob
+                })
+            })
+            .then(res => this._getResponseData(res));
+
+    }
+
     setProfileEdit(userName, userJob) {
         return fetch(`${this._url}/users/me`, {
                 method: 'PATCH',
