@@ -20,14 +20,6 @@
             .then(res => this._getResponseData(res))
     }
 
-    getProfileInfo() {
-        return fetch(`${this._url}/users/me`, {
-                headers: {
-                    authorization: this._token
-                }
-            })
-            .then(res => this._getResponseData(res));
-    }
 
     getUserInfo () {
         return fetch(`${this._url}/users/me`, {
@@ -71,16 +63,6 @@
     }
 
 
-    addLike(id) {
-        return fetch(`${this._url}/cards/likes/${id}`, {
-                method: 'PUT',
-                headers: {
-                    authorization: this._token
-                }
-            })
-            .then(res => this._getResponseData(res))
-    }
-
     changeLikeCardStatus(id, isLiked) {
         return fetch(`${this._url}/cards/likes/${id}`, {
                 method: `${isLiked ? 'PUT' : 'DELETE'}`,
@@ -91,15 +73,6 @@
             .then(res => this._getResponseData(res))
     }
 
-    deleteLike(id) {
-        return fetch(`${this._url}/cards/likes/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    authorization: this._token
-                }
-            })
-            .then(res => this._getResponseData(res))
-    }
 
     deleteCard(cardId) {
         return fetch(`${this._url}/cards/${cardId}`, {

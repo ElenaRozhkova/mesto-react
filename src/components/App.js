@@ -31,6 +31,41 @@ const [cards, setСards] = React.useState([]);
 
   },[isEditProfilePopupOpen]);
 
+
+  React.useEffect(() => {
+    const handleEsc = (event) => {
+       if (event.key === 'Escape') {
+        closeAllPopups();
+      }
+    };
+     document.addEventListener('keydown', handleEsc);
+    return () => {
+     document.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    const closeByOverlay = (evt) => {
+        if (evt.target.classList.contains('popup')) {
+            closeAllPopups();
+          }
+      }
+     document.addEventListener('mousedown', closeByOverlay);
+
+    return () => {
+     document.removeEventListener('mousedown', closeByOverlay);
+    };
+  }, []);
+
+      
+  React.useEffect(() => {
+    api.getInitialCards()
+    .then((res) => {
+        setСards(res);
+      }).catch(err => console.log(err))
+  },[])
+
+
   function handleUpdateUser (profile) {
     api.setUserInfo(profile.name, profile.about)
     .then ((user)=>{
@@ -69,33 +104,6 @@ const [cards, setСards] = React.useState([]);
      })
   }
 
-
-  React.useEffect(() => {
-    const handleEsc = (event) => {
-       if (event.key === 'Escape') {
-        closeAllPopups();
-      }
-    };
-     document.addEventListener('keydown', handleEsc);
-    return () => {
-     document.removeEventListener('keydown', handleEsc);
-    };
-  }, []);
-
-  React.useEffect(() => {
-    const closeByOverlay = (evt) => {
-        if (evt.target.classList.contains('popup')) {
-            closeAllPopups();
-          }
-      }
-     document.addEventListener('mousedown', closeByOverlay);
-
-    return () => {
-     document.removeEventListener('mousedown', closeByOverlay);
-    };
-  }, []);
-
-
     function handleCardClick(card) {
        setSelectedCard(card);
     }
@@ -120,15 +128,6 @@ const [cards, setСards] = React.useState([]);
     }
 
    
-    
-    React.useEffect(() => {
-        api.getInitialCards()
-        .then((res) => {
-            setСards(res);
-          }).catch(err => console.log(err))
-      },[])
-
-
     function handleCardLike(card) {
       // Снова проверяем, есть ли уже лайк на этой карточке
       const isLiked = card.likes.some(i => i._id === currentUser._id);        
@@ -140,8 +139,7 @@ const [cards, setСards] = React.useState([]);
         setСards(newCards);
       });
   }
-
-  
+ 
   function handleCardDelete (card) {        
       api.deleteCard(card._id).then(() => {
           // Формируем новый массив на основе имеющегося, удаляя из него карточку card._id
