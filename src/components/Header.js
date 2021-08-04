@@ -4,7 +4,7 @@ import logo from './../images/Vector.svg'; // Путь к изображению
 function Header() {
   return (
     <header className="header root__section">
-    <img className="header__logo" src={logo} alt="Логотип"/>
+      <img className="header__logo" src={logo} alt="Логотип" />
     </header>
   );
 }
